@@ -4,7 +4,7 @@ When a caching middleware such as `AnthropicPromptCachingMiddleware` wraps this
 middleware from the outside, it applies Anthropic `cache_control` markers to the
 request *before* the fallback loop runs. Those markers are provider-specific and
 cause API errors on non-Anthropic fallback models, so this middleware strips them
-from fallback attempts — but only when the fallback model itself cannot accept
+from fallback attempts â€” but only when the fallback model itself cannot accept
 Anthropic cache markers. When the fallback is another Anthropic model the markers
 are valid and preserve prompt caching, so they are left intact.
 
@@ -247,13 +247,13 @@ def _without_cache_control_from_content_block(
 # content-block and tool `cache_control` markers pass through unchanged.
 # Vertex-hosted Claude (`ChatAnthropicVertex` in `langchain-google`) reports
 # `"anthropic-chat-vertexai"` and nests the same marker shape through its own
-# request builder — not the shared `ChatAnthropic` method. All three keep prompt
+# request builder â€” not the shared `ChatAnthropic` method. All three keep prompt
 # caching intact on fallback.
 #
 # Keep this set in sync with those classes' `_llm_type` values, which live in
 # separate repositories. If a value drifts or a new Anthropic transport ships,
 # the failure mode is silent loss of prompt caching (markers stripped from a
-# model that supports them), not a hard error — so CI here will not catch it.
+# model that supports them), not a hard error â€” so CI here will not catch it.
 _ANTHROPIC_LLM_TYPES: frozenset[str] = frozenset(
     {
         "anthropic-chat",
@@ -347,7 +347,7 @@ class ModelFallbackMiddleware(AgentMiddleware[AgentState[ResponseT], ContextT, R
         except Exception as e:
             last_exception = e
 
-        # Try fallback models — sanitize cache markers only when the fallback
+        # Try fallback models â€” sanitize cache markers only when the fallback
         # model cannot accept them (i.e. is not an Anthropic-compatible model).
         # The request is derived outside the try so a sanitizer or `_llm_type`
         # bug surfaces directly instead of being masked as a model failure.
@@ -389,7 +389,7 @@ class ModelFallbackMiddleware(AgentMiddleware[AgentState[ResponseT], ContextT, R
         except Exception as e:
             last_exception = e
 
-        # Try fallback models — sanitize cache markers only when the fallback
+        # Try fallback models â€” sanitize cache markers only when the fallback
         # model cannot accept them (i.e. is not an Anthropic-compatible model).
         # The request is derived outside the try so a sanitizer or `_llm_type`
         # bug surfaces directly instead of being masked as a model failure.

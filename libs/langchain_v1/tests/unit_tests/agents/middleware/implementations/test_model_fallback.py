@@ -801,17 +801,17 @@ def test_fallback_preserves_cache_markers_for_anthropic_sync() -> None:
     def mock_handler(req: ModelRequest) -> ModelResponse:
         attempts.append(req)
         if len(attempts) == 1:
-            # Primary attempt — markers present
+            # Primary attempt â€” markers present
             _assert_request_has_cache_markers(req)
             msg = "Primary model failed"
             raise ValueError(msg)
         if len(attempts) == 2:
-            # Anthropic fallback — markers preserved
+            # Anthropic fallback â€” markers preserved
             assert req.model is anthropic_fallback
             _assert_request_has_cache_markers(req)
             msg = "Anthropic fallback failed"
             raise ValueError(msg)
-        # Non-Anthropic fallback — markers stripped
+        # Non-Anthropic fallback â€” markers stripped
         assert req.model is non_anthropic_fallback
         _assert_request_is_sanitized(req)
         return ModelResponse(result=[AIMessage(content="non-anthropic fallback")])
@@ -877,7 +877,7 @@ def test_fallback_preserves_cache_markers_for_anthropic_compatible_sync(
             _assert_request_has_cache_markers(req)
             msg = "Primary model failed"
             raise ValueError(msg)
-        # Anthropic-compatible fallback — markers preserved
+        # Anthropic-compatible fallback â€” markers preserved
         assert req.model is fallback
         _assert_request_has_cache_markers(req)
         return ModelResponse(result=[AIMessage(content="fallback")])
@@ -945,12 +945,12 @@ def test_fallback_reverse_order_preserves_anthropic_markers_sync() -> None:
             msg = "Primary model failed"
             raise ValueError(msg)
         if len(attempts) == 2:
-            # Non-Anthropic fallback first — markers stripped
+            # Non-Anthropic fallback first â€” markers stripped
             assert req.model is non_anthropic_fallback
             _assert_request_is_sanitized(req)
             msg = "Non-Anthropic fallback failed"
             raise ValueError(msg)
-        # Anthropic fallback second — markers still present (derived from original)
+        # Anthropic fallback second â€” markers still present (derived from original)
         assert req.model is anthropic_fallback
         _assert_request_has_cache_markers(req)
         return ModelResponse(result=[AIMessage(content="anthropic fallback")])

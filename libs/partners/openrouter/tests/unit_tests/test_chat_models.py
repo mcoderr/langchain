@@ -591,7 +591,7 @@ class TestChatOpenRouterInstantiation:
         """`default_headers` alone (no app attribution) still creates httpx clients.
 
         Guards against a regression where the `if extra_headers:` check runs
-        before `default_headers` is merged in — the header would then be
+        before `default_headers` is merged in â€” the header would then be
         dropped and no custom client created.
         """
         with patch("openrouter.OpenRouter") as mock_cls:

@@ -1265,7 +1265,7 @@ def test_context_overflow_error_carries_response_metadata() -> None:
 
 # The three detection branches in `_handle_groq_invalid_request` are OR'd, and
 # real overflow responses only ever satisfy one at a time, so each is exercised
-# in isolation below — otherwise a branch could be deleted without any test
+# in isolation below â€” otherwise a branch could be deleted without any test
 # noticing.
 
 
