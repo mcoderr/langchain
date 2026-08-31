@@ -853,6 +853,7 @@ def _runnable_support(
 
     return cast("_RunnableSupportCallable[_P, _R_co]", wrapped)
 
+
 @_runnable_support
 def filter_messages(
     messages: Iterable[MessageLikeRepresentation] | PromptValue,
@@ -996,6 +997,7 @@ def filter_messages(
             filtered.append(new_msg)
 
     return filtered
+
 
 @_runnable_support
 def merge_message_runs(
@@ -1177,6 +1179,7 @@ def _merge_message_group(
         merged_msg = message_chunk_to_message(merged_msg)
 
     return merged_msg
+
 
 # TODO: Update so validation errors (for token_counter, for example) are raised on
 # init not at runtime.
