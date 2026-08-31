@@ -1113,7 +1113,7 @@ def _merge_message_group(
     # ── additional_kwargs ──────────────────────────────────────────
     # Variadic merge_dicts is one O(n) pass.
     has_extra_kwargs = any(m.additional_kwargs for m in run[1:])
-    merged_kwargs = (
+    merged_kwargs: dict[Any, Any] = (
         merge_dicts(*(m.additional_kwargs for m in run))
         if has_extra_kwargs
         else first.additional_kwargs
