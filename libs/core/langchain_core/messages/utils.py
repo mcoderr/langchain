@@ -1068,7 +1068,7 @@ def _merge_contents(
 
     if all_string:
         # Fast path: join non-empty parts with separator.
-        non_empty = [c for c in contents if c]
+        non_empty = [c for c in contents if isinstance(c, str) and c]
         if not non_empty:
             return ""
         return chunk_separator.join(non_empty)
@@ -1133,8 +1133,8 @@ def _merge_message_group(
 
     # ── Type-specific fields ───────────────────────────────────────
     if isinstance(first, AIMessage):
-        all_tool_calls: list[dict[str, Any]] = []
-        all_invalid_tool_calls: list[dict[str, Any]] = []
+        all_tool_calls: list[Any] = []
+        all_invalid_tool_calls: list[Any] = []
         merged_usage: dict[str, Any] | None = None
 
         for m in run:
