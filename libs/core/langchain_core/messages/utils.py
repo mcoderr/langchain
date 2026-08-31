@@ -48,9 +48,7 @@ from langchain_core.messages.modifier import RemoveMessage
 from langchain_core.messages.system import SystemMessage, SystemMessageChunk
 from langchain_core.messages.tool import ToolCall, ToolMessage, ToolMessageChunk
 from langchain_core.utils.pydantic import model_json_schema as get_model_json_schema
-
 from langchain_core.utils._merge import merge_dicts
-
 
 if TYPE_CHECKING:
     from langchain_core.language_models import BaseLanguageModel
