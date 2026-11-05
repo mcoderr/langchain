@@ -1,0 +1,6 @@
+customer_id,first_name,last_name,email,phone,city,country
+CUST001,Aarav,Shah,aarav.shah@example.com,+91-9876500001,Ahmedabad,India
+CUST002,Diya,Patel,diya.patel@example.com,+91-9876500002,Mumbai,India
+CUST003,Rohan,Mehta,rohan.mehta@example.com,+91-9876500003,Bengaluru,India
+CUST004,Anaya,Desai,anaya.desai@example.com,+91-9876500004,Pune,India
+CUST005,Kabir,Joshi,kabir.joshi@example.com,+91-9876500005,Delhi,India

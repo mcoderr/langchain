@@ -13,6 +13,7 @@ from typing import (
     Literal,
     TypeVar,
     Union,
+    cast,
     get_args,
     get_origin,
 )
@@ -95,7 +96,7 @@ def _parse_with_schema(
         # Raw JSON schema has no corresponding Python type to instantiate.
         return data
     try:
-        adapter = TypeAdapter[SchemaT](schema)
+        adapter = TypeAdapter[SchemaT](cast("type[SchemaT]", schema))
         return adapter.validate_python(data)
     except Exception as e:
         schema_name = getattr(schema, "__name__", str(schema))
@@ -219,6 +220,15 @@ class ToolStrategy(Generic[SchemaT]):
         message
     - `Callable[[Exception], str]`: Custom function that returns error message
     - `False`: No retry, let exceptions propagate
+
+    !!! warning "Raw JSON schema dicts are not validated"
+        When `schema` is a raw JSON schema `dict` (as opposed to a Pydantic model,
+        `dataclass`, or `TypedDict`), the model's tool-call arguments are returned
+        **as-is without validation** against the schema.
+
+        As a result, `handle_errors` is effectively inert for dict schemas. To get
+        validation and automatic retries, express the schema as a Pydantic model,
+        `dataclass`, or `TypedDict` instead.
     """
 
     def __init__(
